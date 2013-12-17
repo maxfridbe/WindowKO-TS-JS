@@ -104,6 +104,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="App\ViewModels\interfaces.d.ts" />
     <TypeScriptCompile Include="App\ViewModels\MainViewModel.ts" />
+    <TypeScriptCompile Include="App\ViewModels\TemplateWindowViewModel.ts" />
     <TypeScriptCompile Include="App\ViewModels\WindowViewModel.ts" />
     <TypeScriptCompile Include="index.ts" />
     <TypeScriptCompile Include="App\lib\knockout.ts" />

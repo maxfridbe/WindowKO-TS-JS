@@ -4,7 +4,9 @@ interface IWindowViewModel {
     LocationX: KnockoutObservable<number>;
     LocationY: KnockoutObservable<number>;
     StackingOrder: KnockoutObservable<number>;
-    TemplateId: KnockoutObservable<string>;
+    Visible: KnockoutObservable<boolean>;
     Moveable: boolean;
     Resizeable: boolean;
+    Show();
+    Hide();
 }
