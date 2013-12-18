@@ -58,7 +58,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\areas\home\viewmodels\startViewModel.js" />
+    <Content Include="App\areas\home\views\startView.htm" />
+    <Content Include="App\framework\domain\PageViewModel.js" />
+    <Content Include="App\framework\system.js" />
+    <Content Include="App\framework\templates\WindowTemplates.htm" />
+    <Content Include="App\lib\extensions\knockout\windowing.js" />
     <Content Include="App\lib\jquery-1.10.2.min.js" />
+    <Content Include="App\lib\jquery.js" />
     <Content Include="App\lib\knockout-3.0.0.js" />
     <Content Include="App\lib\less-1.5.1.min.js" />
     <Content Include="App\lib\pager.js">
@@ -72,6 +79,7 @@
     <Content Include="App\ViewModels\MainViewModel.js">
       <DependentUpon>MainViewModel.ts</DependentUpon>
     </Content>
+    <Content Include="App\ViewModels\TemplateWindowViewModel.js" />
     <Content Include="App\ViewModels\WindowViewModel.js">
       <DependentUpon>WindowViewModel.ts</DependentUpon>
     </Content>
@@ -100,6 +108,18 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App\lib\extensions\knockout\ko.js.map" />
+    <Content Include="App\lib\extensions\knockout\windowing.js.map" />
+    <Content Include="App\framework\system.js.map" />
+    <Content Include="App\areas\home\viewmodels\startViewModel.js.map" />
+    <Content Include="App\framework\domain\PageViewModel.js.map" />
+    <Content Include="App\lib\jquery.js.map" />
+    <Content Include="App\lib\knockout.js.map" />
+    <Content Include="App\lib\pager.js.map" />
+    <Content Include="App\ViewModels\TemplateWindowViewModel.js.map" />
+    <Content Include="App\ViewModels\MainViewModel.js.map" />
+    <Content Include="App\ViewModels\WindowViewModel.js.map" />
+    <Content Include="index.js.map" />
     <None Include="index.less" />
     <None Include="App\lib\styles\reset.less" />
     <None Include="Web.Debug.config">
@@ -110,7 +130,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="App\extensions\knockout\windowing.ts" />
+    <TypeScriptCompile Include="App\areas\home\viewmodels\startViewModel.ts" />
+    <TypeScriptCompile Include="App\framework\domain\PageViewModel.ts" />
+    <TypeScriptCompile Include="App\framework\system.ts" />
+    <TypeScriptCompile Include="App\lib\extensions\knockout\windowing.ts" />
     <TypeScriptCompile Include="App\lib\jquery.ts" />
     <TypeScriptCompile Include="App\lib\pager.ts" />
     <TypeScriptCompile Include="App\ViewModels\interfaces.d.ts" />

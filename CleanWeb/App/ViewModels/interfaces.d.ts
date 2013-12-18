@@ -1,3 +1,9 @@
+interface IWindowingSettings {
+    MoveHandleSelector: string;
+    ResizeHandleSelector: string;
+    WindowViewModel: IWindowViewModel;
+}
+
 interface IWindowViewModel {
     Width: KnockoutObservable<number>;
     Height: KnockoutObservable<number>;
@@ -5,8 +11,10 @@ interface IWindowViewModel {
     LocationY: KnockoutObservable<number>;
     StackingOrder: KnockoutObservable<number>;
     Visible: KnockoutObservable<boolean>;
-    Moveable: boolean;
-    Resizeable: boolean;
+    Moveable: KnockoutObservable<boolean>;
+    Resizeable: KnockoutObservable<boolean>;
     Show();
     Hide();
 }
+
+interface ITemplateDefinition { templateId: string; templatePath: string; }

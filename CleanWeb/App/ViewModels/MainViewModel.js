@@ -1,25 +1,27 @@
-﻿define(["require", "exports", 'App/ViewModels/WindowViewModel', 'App/ViewModels/TemplateWindowViewModel'], function(require, exports, WindowViewModel, TemplateWindowViewModel) {
-    var MainViewModel = (function () {
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+define(["require", "exports", 'App/lib/knockout', 'App/ViewModels/WindowViewModel', 'App/ViewModels/TemplateWindowViewModel', 'App/framework/domain/PageViewModel'], function(require, exports, ko, WindowViewModel, TemplateWindowViewModel, PageViewModel) {
+    var MainViewModel = (function (_super) {
+        __extends(MainViewModel, _super);
         function MainViewModel() {
-            this.Win1 = new WindowViewModel("Moveable", 100, 100, 20, 30, 1, true, false, false);
-            this.Win2 = new WindowViewModel("Resizeable", 100, 220, 80, 100, 1, false, true, false);
+            _super.call(this);
             this.Win3 = new TemplateWindowViewModel("tmpl1", { name: 'hello' }, "Templated", 300, 300, 300, 300, 2, true, true, false);
-            this.Pages = [];
+            this.Pages = [this._page("start", "Title", 'app/areas/home', 'start')];
 
             this.Pages.push();
         }
         MainViewModel.prototype.showalldialogs = function () {
-            this.Win1.Show();
-            this.Win2.Show();
             this.Win3.Show();
         };
         MainViewModel.prototype.hidealldialogs = function () {
-            this.Win1.Hide();
-            this.Win2.Hide();
             this.Win3.Hide();
         };
         return MainViewModel;
-    })();
+    })(PageViewModel);
     
     return MainViewModel;
 });

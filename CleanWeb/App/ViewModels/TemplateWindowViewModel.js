@@ -7,15 +7,13 @@
 define(["require", "exports", 'App/lib/knockout', 'App/ViewModels/WindowViewModel'], function(require, exports, ko, WindowViewModel) {
     var TemplateWindowViewModel = (function (_super) {
         __extends(TemplateWindowViewModel, _super);
-        function TemplateWindowViewModel(templateId, TemplateViewModel, title, width, height, locationX, locationY, stackingOrder, Moveable, Resizeable, visible) {
+        function TemplateWindowViewModel(templateId, TemplateViewModel, title, width, height, locationX, locationY, stackingOrder, moveable, resizeable, visible) {
             if (typeof stackingOrder === "undefined") { stackingOrder = 1; }
-            if (typeof Moveable === "undefined") { Moveable = true; }
-            if (typeof Resizeable === "undefined") { Resizeable = true; }
+            if (typeof moveable === "undefined") { moveable = true; }
+            if (typeof resizeable === "undefined") { resizeable = true; }
             if (typeof visible === "undefined") { visible = true; }
-            _super.call(this, title, width, height, locationX, locationY, stackingOrder, Moveable, Resizeable, visible);
+            _super.call(this, title, width, height, locationX, locationY, stackingOrder, moveable, resizeable, visible);
             this.TemplateViewModel = TemplateViewModel;
-            this.Moveable = Moveable;
-            this.Resizeable = Resizeable;
             this.TemplateId = ko.observable(templateId);
         }
         return TemplateWindowViewModel;

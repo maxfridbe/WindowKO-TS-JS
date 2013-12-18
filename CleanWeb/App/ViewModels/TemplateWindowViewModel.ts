@@ -9,10 +9,10 @@ class TemplateWindowViewModel extends WindowViewModel {
         locationX: number,
         locationY: number,
         stackingOrder: number=1,
-        public Moveable: boolean= true,
-        public Resizeable: boolean= true,
+        moveable: boolean= true,
+        resizeable: boolean= true,
         visible:boolean = true) {
-            super(title, width, height, locationX, locationY, stackingOrder, Moveable, Resizeable, visible);
+            super(title, width, height, locationX, locationY, stackingOrder, moveable, resizeable, visible);
             this.TemplateId = ko.observable(templateId);
         
 

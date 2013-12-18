@@ -1,0 +1,12 @@
+﻿<script type="text/html" id="tmplWindowed">
+    <div class="window" data-bind="windowing:{WindowViewModel:$data, MoveHandleSelector: '.title', ResizeHandleSelector:'.handle'}, visible:Visible">
+        <div class="title" data-bind="text:Title"></div>
+        <div class="body">
+            <div data-bind="template:{name:TemplateId, data:TemplateViewModel}">
+
+            </div>
+        </div>
+        <div class="footer"><div class="handle"></div></div>
+    </div>
+
+</script>

@@ -8,8 +8,8 @@ class WindowViewModel implements IWindowViewModel {
         locationX: number,
         locationY: number,
         stackingOrder: number,
-        public Moveable: boolean= true,
-        public Resizeable: boolean= true,
+        moveable: boolean= true,
+        resizeable: boolean= true,
         visible: boolean = true) {
 
         this.Width = ko.observable(width);
@@ -19,8 +19,11 @@ class WindowViewModel implements IWindowViewModel {
         this.StackingOrder = ko.observable(stackingOrder);
         this.Title = ko.observable(title);
         this.Visible = ko.observable(visible);
+        this.Moveable = ko.observable(moveable);
+        this.Resizeable = ko.observable(resizeable);
     }
-
+    Moveable: KnockoutObservable<boolean>;
+    Resizeable: KnockoutObservable<boolean>;
     Visible: KnockoutObservable<boolean>;
     Width: KnockoutObservable<number>;
     Height: KnockoutObservable<number>;

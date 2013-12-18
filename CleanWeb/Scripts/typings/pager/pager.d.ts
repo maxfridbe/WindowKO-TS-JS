@@ -1,10 +1,23 @@
 interface PagerStatic {
     extendWithPage(viewModel: any);
     start();
+    onSourceError: { add: (any) => void };
 }
-interface IPageBasic {
+interface IPagerPage { }
+interface IPageConfig {
     id: string;
     title: string;
+    showElement? (page, callback: () => void);
+    hideElement? (page, callback: () => void);
+
+    sourceLoaded?: (IPagerPage) => void;
+    source?: string;
+
+    sourceOnShow?: any;
+    sourceCache?: boolean;
+
+    withOnShow?: (any) => any;
+    bind?: any;
 }
 
 declare var pager: PagerStatic;
