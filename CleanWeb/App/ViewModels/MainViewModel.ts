@@ -6,7 +6,11 @@ class MainViewModel {
     public Win1 = new WindowViewModel("Moveable", 100, 100, 20, 30, 1, true, false, false);
     public Win2 = new WindowViewModel("Resizeable", 100, 220, 80, 100, 1, false, true, false);
     public Win3 = new TemplateWindowViewModel("tmpl1", { name: 'hello' }, "Templated", 300, 300, 300, 300, 2, true, true, false);
-    constructor() { }
+    constructor() {
+        this.Pages = [];
+
+        this.Pages.push();
+    }
 
     showalldialogs() {
         this.Win1.Show();
@@ -18,5 +22,7 @@ class MainViewModel {
         this.Win2.Hide();
         this.Win3.Hide();
     }
+
+    public Pages: any[];
 }
 export = MainViewModel;

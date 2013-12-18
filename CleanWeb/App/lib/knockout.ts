@@ -1,5 +1,6 @@
-///<amd-dependency path="app/lib/knockout-3.0.0"/>
+///<amd-dependency path="knockout"/>
 declare var require;
-var ko = <KnockoutStatic>require('app/lib/knockout-3.0.0');
+
+var ko = <KnockoutStatic>require('knockout');
 
 export = ko;

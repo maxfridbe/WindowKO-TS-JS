@@ -58,7 +58,26 @@
         <div data-bind="template:{name:'window-templated',data:Win3}">
 
         </div>
+
+        <div data-bind="foreach:Pages">
+            <div data-bind="page: $data">
+            </div>
+        </div>
+
+
     </div>
-    <script type="text/javascript" src="app/lib/require.js" data-main="index"></script>
+    <script type="text/javascript" src="app/lib/require.js"></script>
+
+    <script>
+        requirejs.config({
+            paths: {
+                'jquery': "App/lib/jquery-1.10.2.min",
+                'knockout':"App/lib/knockout-3.0.0",
+                'pager':"App/lib/pager.min"
+            }
+        });
+        require(['index']);
+        
+    </script>
 </body>
 </html>
