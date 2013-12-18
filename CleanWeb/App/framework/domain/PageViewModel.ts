@@ -25,24 +25,25 @@ class PageViewModel {
             }
         }
     }
-    _loadView(viewModule) {
+    _loadView(viewName:string) {
         return function (page, callback) {
-            require([viewModule], function (viewString) {
-                $(page.element).html(viewString);
+            $.get(viewName).done((viewString) => {
+                $(page.element).hide().html(viewString);
                 callback();
             });
         };
     }
-
-    _loadVM(viewModelName: string, dfdVMLoaded: JQueryDeferred<PageViewModel>) {
-        return function (callback) {
+    _loadVM(viewModelName: string, loadVMPromise: JQueryPromise<any>): JQueryPromise<any>{
+        var dfdVMLoad = $.Deferred();
+        loadVMPromise.done(() => {
             require([viewModelName], function (mod) {
                 var viewModel: PageViewModel = new mod();
-                dfdVMLoaded.resolve(viewModel);
-                callback(viewModel);
+                dfdVMLoad.resolve(viewModel);
             });
-        };
+        });
+        return dfdVMLoad.promise();
     }
+
     _buildShow(vmPromise: JQueryPromise<PageViewModel>): (page, callback) => void {
         return (page, callback) => {
             vmPromise.done((vm: PageViewModel) => {
@@ -63,23 +64,31 @@ class PageViewModel {
             });
         };
     }
+    _buildWithOnShow(dfdShouldLoadVM: JQueryDeferred<any>, vmPromise: JQueryPromise<any>) {
+        return function (callback) {
+            dfdShouldLoadVM.resolve();
+            vmPromise.done((vm) => {
+                callback(vm);
+            });
+        };
+    }
     _page(pageRouteId: string, title: string, area: string, conventionName: string): IPageConfig {
         var viewName: string = area + "/views/" + conventionName + "View.htm";
         var viewModelName: string = area + "/viewmodels/" + conventionName + "ViewModel";
 
+        var dfdShouldLoadVM = $.Deferred();
+        var vmPromise = this._loadVM(viewModelName, dfdShouldLoadVM.promise());
         var dfdSourceLoaded = $.Deferred();
         var dfdVMLoaded = $.Deferred<PageViewModel>();
-
-        var vmPromise = dfdVMLoaded.promise();
-
+        
 
         return <IPageConfig>{
             id: pageRouteId,
             title: title,
             showElement: this._buildShow(vmPromise),
             hideElement: this._buildHide(vmPromise),
-            withOnShow: this._loadVM(viewModelName, dfdVMLoaded),
-            sourceOnShow: viewName,
+            withOnShow: this._buildWithOnShow(dfdShouldLoadVM, vmPromise),
+            sourceOnShow: this._loadView(viewName),
             sourceLoaded: () => {
                 vmPromise.done((vm: PageViewModel) => {
                     vm.SourceLoaded();

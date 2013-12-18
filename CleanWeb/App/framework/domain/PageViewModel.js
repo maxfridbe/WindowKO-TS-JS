@@ -26,24 +26,25 @@ define(["require", "exports", 'App/lib/jquery'], function(require, exports, $) {
                 }
             }
         };
-        PageViewModel.prototype._loadView = function (viewModule) {
+        PageViewModel.prototype._loadView = function (viewName) {
             return function (page, callback) {
-                require([viewModule], function (viewString) {
-                    $(page.element).html(viewString);
+                $.get(viewName).done(function (viewString) {
+                    $(page.element).hide().html(viewString);
                     callback();
                 });
             };
         };
-
-        PageViewModel.prototype._loadVM = function (viewModelName, dfdVMLoaded) {
-            return function (callback) {
+        PageViewModel.prototype._loadVM = function (viewModelName, loadVMPromise) {
+            var dfdVMLoad = $.Deferred();
+            loadVMPromise.done(function () {
                 require([viewModelName], function (mod) {
                     var viewModel = new mod();
-                    dfdVMLoaded.resolve(viewModel);
-                    callback(viewModel);
+                    dfdVMLoad.resolve(viewModel);
                 });
-            };
+            });
+            return dfdVMLoad.promise();
         };
+
         PageViewModel.prototype._buildShow = function (vmPromise) {
             var _this = this;
             return function (page, callback) {
@@ -68,22 +69,30 @@ define(["require", "exports", 'App/lib/jquery'], function(require, exports, $) {
                 });
             };
         };
+        PageViewModel.prototype._buildWithOnShow = function (dfdShouldLoadVM, vmPromise) {
+            return function (callback) {
+                dfdShouldLoadVM.resolve();
+                vmPromise.done(function (vm) {
+                    callback(vm);
+                });
+            };
+        };
         PageViewModel.prototype._page = function (pageRouteId, title, area, conventionName) {
             var viewName = area + "/views/" + conventionName + "View.htm";
             var viewModelName = area + "/viewmodels/" + conventionName + "ViewModel";
 
+            var dfdShouldLoadVM = $.Deferred();
+            var vmPromise = this._loadVM(viewModelName, dfdShouldLoadVM.promise());
             var dfdSourceLoaded = $.Deferred();
             var dfdVMLoaded = $.Deferred();
-
-            var vmPromise = dfdVMLoaded.promise();
 
             return {
                 id: pageRouteId,
                 title: title,
                 showElement: this._buildShow(vmPromise),
                 hideElement: this._buildHide(vmPromise),
-                withOnShow: this._loadVM(viewModelName, dfdVMLoaded),
-                sourceOnShow: viewName,
+                withOnShow: this._buildWithOnShow(dfdShouldLoadVM, vmPromise),
+                sourceOnShow: this._loadView(viewName),
                 sourceLoaded: function () {
                     vmPromise.done(function (vm) {
                         vm.SourceLoaded();
