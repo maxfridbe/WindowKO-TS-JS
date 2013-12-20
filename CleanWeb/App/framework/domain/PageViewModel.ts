@@ -27,6 +27,7 @@ class PageViewModel {
     }
     _loadView(viewName:string) {
         return function (page, callback) {
+            var elem:Element = page.
             $.get(viewName).done((viewString) => {
                 $(page.element).hide().html(viewString);
                 callback();

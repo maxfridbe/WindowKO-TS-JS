@@ -28,7 +28,7 @@ define(["require", "exports", 'App/lib/jquery'], function(require, exports, $) {
         };
         PageViewModel.prototype._loadView = function (viewName) {
             return function (page, callback) {
-                $.get(viewName).done(function (viewString) {
+                var elem = page.$.get(viewName).done(function (viewString) {
                     $(page.element).hide().html(viewString);
                     callback();
                 });
