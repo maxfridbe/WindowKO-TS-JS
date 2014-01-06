@@ -18,3 +18,34 @@ interface IWindowViewModel {
 }
 
 interface ITemplateDefinition { templateId: string; templatePath: string; }
+
+interface IPageNavigation {
+    Href: string;
+    Title: string;
+}
+
+interface IGridViewModel {
+    Rows: IGridRow[];
+    Configuration: IGridConfiguration;
+    CurrentPage: number;
+}
+
+interface IGridDataAdapter {
+    GetConfiguration(): IGridConfiguration;
+    GetData(pageNumber: number): IGridRow[];
+}
+interface IGridConfiguration {
+    PageCount: number;
+    ColumnDefinitions: IGridColumnDefinition[];
+}
+interface IGridColumnDefinition {
+    Title: string;
+    Key: string;
+    Type: string;
+}
+
+interface IGridRow {
+}
+
+
+

@@ -23,7 +23,10 @@ export module Index {
     pager.start();
 
     //load templates
-    var tmplPromise = system.LoadTemplates([{ templateId: "tmplWindowed", templatePath: "/app/framework/templates/windowtemplates.htm" }]);
+    var tmplPromise = system.LoadTemplates([
+        { templateId: "tmplWindowed", templatePath: "/app/framework/templates/windowtemplates.htm" },
+        { templateId: "tmplGrid", templatePath: "/app/framework/templates/gridtemplates.htm" },
+    ]);
 
     //apply bindings
     tmplPromise.done(() => {

@@ -4,12 +4,71 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", 'App/framework/domain/PageViewModel'], function(require, exports, PageViewModel) {
+define(["require", "exports", 'App/framework/domain/PageViewModel', 'App/framework/domain/GridViewModel'], function(require, exports, PageViewModel, GridViewModel) {
     var startViewModel = (function (_super) {
         __extends(startViewModel, _super);
         function startViewModel() {
-            _super.apply(this, arguments);
+            _super.call(this);
             this.x = 3;
+            this.testGrid = new GridViewModel({
+                GetConfiguration: function () {
+                    return {
+                        PageCount: 2,
+                        ColumnDefinitions: [
+                            {
+                                Title: 'First Name',
+                                Key: 'FirstName',
+                                Type: 'String'
+                            },
+                            {
+                                Title: 'Last Name',
+                                Key: 'LastName',
+                                Type: 'String'
+                            },
+                            {
+                                Title: 'Phone Number',
+                                Key: 'PhoneNumber',
+                                Type: 'Number'
+                            },
+                            {
+                                Title: 'Address',
+                                Key: 'Address',
+                                Type: 'String'
+                            },
+                            {
+                                Title: '',
+                                Key: '',
+                                Data: { text: 'Click Me', handler: function (Row) {
+                                        console.log('hanlded');
+                                    } },
+                                Type: 'Button'
+                            }
+                        ]
+                    };
+                },
+                GetData: function (pageNumber) {
+                    return [
+                        {
+                            FirstName: 'Bob',
+                            LastName: 'Dole',
+                            PhoneNumber: 2245653199,
+                            Address: '1234 Fake St.'
+                        },
+                        {
+                            FirstName: 'Frank',
+                            LastName: 'Doyle',
+                            PhoneNumber: 2245653199,
+                            Address: '1234 Fake St. 2'
+                        },
+                        {
+                            FirstName: 'Boby',
+                            LastName: 'bark',
+                            PhoneNumber: 8475618582,
+                            Address: '222 Fake St. 2'
+                        }
+                    ];
+                }
+            });
         }
         startViewModel.prototype.SourceLoaded = function () {
             console.log('sourceloaded');

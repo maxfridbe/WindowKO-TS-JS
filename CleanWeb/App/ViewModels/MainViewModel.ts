@@ -3,13 +3,14 @@ import WindowViewModel = require('App/ViewModels/WindowViewModel');
 import TemplateWindowViewModel = require('App/ViewModels/TemplateWindowViewModel');
 import PageViewModel = require('App/framework/domain/PageViewModel');
 
-class MainViewModel extends PageViewModel{
+
+class MainViewModel extends PageViewModel {
     public Win3 = new TemplateWindowViewModel("tmpl1", { name: 'hello' }, "Templated", 300, 300, 300, 300, 2, true, true, false);
     constructor() {
         super();
-        this.Pages = [this._page("start","Title",'app/areas/home','start')];
-
-        this.Pages.push();
+        this.Pages = [this._page("start", "Title", 'app/areas/home', 'start')];
+        this.Navigation = [{Href:'#start',Title:'Home'}];
+        //this.Pages.push();
     }
 
     showalldialogs() {
@@ -18,7 +19,7 @@ class MainViewModel extends PageViewModel{
     hidealldialogs() {
         this.Win3.Hide();
     }
-
+    public Navigation: IPageNavigation[];
     public Pages: IPageConfig[];
 }
 export = MainViewModel;

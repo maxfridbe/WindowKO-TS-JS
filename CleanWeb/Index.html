@@ -12,15 +12,20 @@
 </head>
 <body>
     <div id="app">
-        <a data-bind="click:showalldialogs">Show all Dialogs</a>
-        <a data-bind="click:hidealldialogs">Hide all Dialogs</a>
-        <a href="#start">Goto Start</a>
-
+        <div class="header">
+            <ul>
+                <li><a data-bind="click:showalldialogs">Show all Dialogs</a></li>
+                <li><a data-bind="click:hidealldialogs">Hide all Dialogs</a></li>
+                <!-- ko foreach:Navigation-->
+                <li><a data-bind="attr:{'href':Href},text:Title"></a></li>
+                <!--/ko-->
+            </ul>
+        </div>
         <div data-bind="template:{name:'tmplWindowed',data:Win3}">
 
         </div>
 
-        <div data-bind="foreach:Pages">
+        <div class="body" data-bind="foreach:Pages">
             <div data-bind="page: $data">
             </div>
         </div>

@@ -58,10 +58,17 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\areas\home\styles\start.css">
+      <DependentUpon>start.less</DependentUpon>
+    </Content>
+    <Content Include="App\areas\home\styles\start.min.css">
+      <DependentUpon>start.less</DependentUpon>
+    </Content>
     <Content Include="App\areas\home\viewmodels\startViewModel.js" />
     <Content Include="App\areas\home\views\startView.htm" />
     <Content Include="App\framework\domain\PageViewModel.js" />
     <Content Include="App\framework\system.js" />
+    <Content Include="App\framework\templates\GridTemplates.htm" />
     <Content Include="App\framework\templates\WindowTemplates.htm" />
     <Content Include="App\lib\extensions\knockout\windowing.js" />
     <Content Include="App\lib\jquery-1.10.2.min.js" />
@@ -120,6 +127,47 @@
     <Content Include="App\ViewModels\MainViewModel.js.map" />
     <Content Include="App\ViewModels\WindowViewModel.js.map" />
     <Content Include="index.js.map" />
+    <Content Include="App\lib\styles\less\alerts.less" />
+    <Content Include="App\lib\styles\less\badges.less" />
+    <Content Include="App\lib\styles\less\bootstrap.less" />
+    <Content Include="App\lib\styles\less\breadcrumbs.less" />
+    <Content Include="App\lib\styles\less\button-groups.less" />
+    <Content Include="App\lib\styles\less\buttons.less" />
+    <Content Include="App\lib\styles\less\carousel.less" />
+    <Content Include="App\lib\styles\less\close.less" />
+    <Content Include="App\lib\styles\less\code.less" />
+    <Content Include="App\lib\styles\less\component-animations.less" />
+    <Content Include="App\lib\styles\less\dropdowns.less" />
+    <Content Include="App\lib\styles\less\forms.less" />
+    <Content Include="App\lib\styles\less\glyphicons.less" />
+    <Content Include="App\lib\styles\less\grid.less" />
+    <Content Include="App\lib\styles\less\input-groups.less" />
+    <Content Include="App\lib\styles\less\jumbotron.less" />
+    <Content Include="App\lib\styles\less\labels.less" />
+    <Content Include="App\lib\styles\less\list-group.less" />
+    <Content Include="App\lib\styles\less\media.less" />
+    <Content Include="App\lib\styles\less\mixins.less" />
+    <Content Include="App\lib\styles\less\modals.less" />
+    <Content Include="App\lib\styles\less\navbar.less" />
+    <Content Include="App\lib\styles\less\navs.less" />
+    <Content Include="App\lib\styles\less\normalize.less" />
+    <Content Include="App\lib\styles\less\pager.less" />
+    <Content Include="App\lib\styles\less\pagination.less" />
+    <Content Include="App\lib\styles\less\panels.less" />
+    <Content Include="App\lib\styles\less\popovers.less" />
+    <Content Include="App\lib\styles\less\print.less" />
+    <Content Include="App\lib\styles\less\progress-bars.less" />
+    <Content Include="App\lib\styles\less\responsive-utilities.less" />
+    <Content Include="App\lib\styles\less\scaffolding.less" />
+    <Content Include="App\lib\styles\less\tables.less" />
+    <Content Include="App\lib\styles\less\theme.less" />
+    <Content Include="App\lib\styles\less\thumbnails.less" />
+    <Content Include="App\lib\styles\less\tooltip.less" />
+    <Content Include="App\lib\styles\less\type.less" />
+    <Content Include="App\lib\styles\less\utilities.less" />
+    <Content Include="App\lib\styles\less\variables.less" />
+    <Content Include="App\lib\styles\less\wells.less" />
+    <Content Include="App\areas\home\styles\start.less" />
     <None Include="index.less" />
     <None Include="App\lib\styles\reset.less" />
     <None Include="Web.Debug.config">
@@ -131,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\areas\home\viewmodels\startViewModel.ts" />
+    <TypeScriptCompile Include="App\framework\domain\GridViewModel.ts" />
     <TypeScriptCompile Include="App\framework\domain\PageViewModel.ts" />
     <TypeScriptCompile Include="App\framework\system.ts" />
     <TypeScriptCompile Include="App\lib\extensions\knockout\windowing.ts" />
