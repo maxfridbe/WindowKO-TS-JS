@@ -1,11 +1,19 @@
+/// <reference path="../../viewmodels/interfaces.d.ts" />
+import ko = require('App/lib/knockout');
+
 class GridViewModel implements IGridViewModel {
 
-    Rows: IGridRow[];
-    Configuration: IGridConfiguration;
-    CurrentPage: number=1;
+    Rows: KnockoutObservableArray<IGridRow> = ko.observableArray<IGridRow>();
+    Configuration: KnockoutObservable<IGridConfiguration> = ko.observable<IGridConfiguration>();
+    CurrentPage: KnockoutObservable<number> = ko.observable(1);
     constructor(adapter: IGridDataAdapter) {
-        this.Configuration = adapter.GetConfiguration();
-        this.Rows = adapter.GetData(this.CurrentPage);
+
+        adapter.GetConfiguration().done((config) => {
+            this.Configuration(config);
+        });
+        adapter.GetData(this.CurrentPage()).done((data) => {
+            this.Rows(data);
+        });
     }
 }
 export = GridViewModel;

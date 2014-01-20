@@ -1,4 +1,4 @@
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -12,7 +12,8 @@ define(["require", "exports", 'App/framework/domain/PageViewModel', 'App/framewo
             this.x = 3;
             this.testGrid = new GridViewModel({
                 GetConfiguration: function () {
-                    return {
+                    var dfdResult = $.Deferred();
+                    var cfg = {
                         PageCount: 2,
                         ColumnDefinitions: [
                             {
@@ -45,9 +46,12 @@ define(["require", "exports", 'App/framework/domain/PageViewModel', 'App/framewo
                             }
                         ]
                     };
+                    dfdResult.resolve(cfg);
+                    return dfdResult.promise();
                 },
                 GetData: function (pageNumber) {
-                    return [
+                    var dfdResult = $.Deferred();
+                    var rows = [
                         {
                             FirstName: 'Bob',
                             LastName: 'Dole',
@@ -67,6 +71,8 @@ define(["require", "exports", 'App/framework/domain/PageViewModel', 'App/framewo
                             Address: '222 Fake St. 2'
                         }
                     ];
+                    dfdResult.resolve(rows);
+                    return dfdResult.promise();
                 }
             });
         }

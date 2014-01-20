@@ -1,17 +1,20 @@
 ﻿<script type="text/html" id="tmplGrid">
     <table class="table table-striped">
+        <!--ko if:Configuration() -->
         <thead>
-            <tr data-bind="foreach:Configuration.ColumnDefinitions">
+            <tr data-bind="foreach:Configuration().ColumnDefinitions">
                 <th data-bind="text:Title"></th>
             </tr>
         </thead>
         <tbody data-bind="foreach: {data:Rows, as:'Row'}">
-            <tr data-bind="foreach: {data:$parent.Configuration.ColumnDefinitions, as:'colDef'}">
-               
+
+            <tr data-bind="foreach: {data:$parent.Configuration().ColumnDefinitions, as:'colDef'}">
+
                 <td data-bind="template: { name:function(){return 'tmplGridCol'+colDef.Type;}, data:{ColumnDefinition:colDef, Row:Row}}"></td>
-                
+
             </tr>
-        </tbody>
+
+        </tbody><!--/ko-->
     </table>
 </script>
 
@@ -24,5 +27,5 @@
 </script>
 
 <script type="text/html" id="tmplGridColButton">
-    <span class="btn btn-default" data-bind="text:$data.ColumnDefinition.Data.text, click:$data.ColumnDefinition.Data.handler($data.Row)"></span>
+    <span class="btn btn-default" data-bind="text:$data.ColumnDefinition.Data.text, click:function(){$data.ColumnDefinition.Data.handler($data.Row);}"></span>
 </script>

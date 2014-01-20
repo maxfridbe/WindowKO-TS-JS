@@ -10,27 +10,38 @@ define(["require", "exports", 'App/lib/jquery'], function(require, exports, $) {
         };
 
         PageViewModel.prototype._onPageIn = function (page, callback) {
-            $(page.element).hide().fadeIn(1000, callback);
+            var $e = $(page.element);
+
+            //$e.show();
+            //callback();
+            //if (page.pageHiddenOnce) {
+            //    $e.show().fadeIn(1000, callback);
+            //    return;
+            //}
+            $e.hide().fadeIn(1000, callback);
         };
         PageViewModel.prototype._onPageOut = function (page, callback) {
             var $e = $(page.element);
             if (!page.pageHiddenOnce) {
                 page.pageHiddenOnce = true;
+            }
+            $e.fadeOut(1000, function () {
                 $e.hide();
-            } else {
-                $e.fadeOut(1000, function () {
-                    $e.hide();
-                });
                 if (callback) {
                     callback();
                 }
-            }
+            });
         };
         PageViewModel.prototype._loadView = function (viewName) {
             return function (page, callback) {
                 var elem = page.element;
+                var $elem = $(elem);
+                if (page.pageHiddenOnce) {
+                    //callback(); causes element to hide
+                    return;
+                }
                 $.get(viewName).done(function (viewString) {
-                    $(elem).hide().html(viewString);
+                    $elem.hide().html(viewString);
                     callback();
                 });
             };

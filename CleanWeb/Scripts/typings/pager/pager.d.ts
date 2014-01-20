@@ -1,6 +1,7 @@
 interface PagerStatic {
     extendWithPage(viewModel: any);
     start();
+    start(startingPage: string);
     onSourceError: { add: (any) => void };
 }
 interface IPagerPage { }

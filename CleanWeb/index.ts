@@ -20,7 +20,11 @@ export module Index {
     //application
     var main = new MainViewModel()
     pager.extendWithPage(main);
-    pager.start();
+    if (window.location.href.indexOf("#start") !== -1) {
+        pager.start();
+    } else {
+        pager.start('start');
+    }
 
     //load templates
     var tmplPromise = system.LoadTemplates([

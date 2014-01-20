@@ -1,3 +1,4 @@
+/// <reference path="../../scripts/typings/knockout/knockout.d.ts" />
 interface IWindowingSettings {
     MoveHandleSelector: string;
     ResizeHandleSelector: string;
@@ -25,14 +26,14 @@ interface IPageNavigation {
 }
 
 interface IGridViewModel {
-    Rows: IGridRow[];
-    Configuration: IGridConfiguration;
-    CurrentPage: number;
+    Rows: KnockoutObservableArray<IGridRow>;
+    Configuration: KnockoutObservable<IGridConfiguration>;
+    CurrentPage: KnockoutObservable<number>;
 }
 
 interface IGridDataAdapter {
-    GetConfiguration(): IGridConfiguration;
-    GetData(pageNumber: number): IGridRow[];
+    GetConfiguration(): JQueryPromise<IGridConfiguration>;
+    GetData(pageNumber: number): JQueryPromise<IGridRow[]>;
 }
 interface IGridConfiguration {
     PageCount: number;
@@ -43,7 +44,12 @@ interface IGridColumnDefinition {
     Key: string;
     Type: string;
 }
-
+interface IGridSearch {
+    Key: string;
+    Value: string;
+    Page: number;
+    PageSize: number;
+}
 interface IGridRow {
 }
 

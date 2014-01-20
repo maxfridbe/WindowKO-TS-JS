@@ -9,32 +9,44 @@ class PageViewModel {
     Hidden() { }
 
     _onPageIn(page, callback) {
-        $(page.element).hide().fadeIn(1000, callback);
+        var $e = $(page.element);
+        //$e.show();
+        //callback();
+        //if (page.pageHiddenOnce) {
+        //    $e.show().fadeIn(1000, callback);
+        //    return;
+        //}
+        $e.hide().fadeIn(1000, callback);
     }
     _onPageOut(page, callback) {
         var $e = $(page.element);
         if (!page.pageHiddenOnce) {
             page.pageHiddenOnce = true;
+        }
+        $e.fadeOut(1000, function () {
             $e.hide();
-        } else {
-            $e.fadeOut(1000, function () {
-                $e.hide();
-            });
             if (callback) {
                 callback();
             }
-        }
+        });
+
+
     }
-    _loadView(viewName:string) {
+    _loadView(viewName: string) {
         return function (page, callback) {
             var elem: Element = page.element;
+            var $elem = $(elem);
+            if (page.pageHiddenOnce) {
+                //callback(); causes element to hide
+                return;
+            }
             $.get(viewName).done((viewString) => {
-                $(elem).hide().html(viewString);
+                $elem.hide().html(viewString);
                 callback();
             });
         };
     }
-    _loadVM(viewModelName: string, loadVMPromise: JQueryPromise<any>): JQueryPromise<any>{
+    _loadVM(viewModelName: string, loadVMPromise: JQueryPromise<any>): JQueryPromise<any> {
         var dfdVMLoad = $.Deferred();
         loadVMPromise.done(() => {
             require([viewModelName], function (mod) {
@@ -81,7 +93,7 @@ class PageViewModel {
         var vmPromise = this._loadVM(viewModelName, dfdShouldLoadVM.promise());
         var dfdSourceLoaded = $.Deferred();
         var dfdVMLoaded = $.Deferred<PageViewModel>();
-        
+
 
         return <IPageConfig>{
             id: pageRouteId,

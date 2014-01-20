@@ -11,7 +11,8 @@ class startViewModel extends PageViewModel{
         super();
         this.testGrid = new GridViewModel(<IGridDataAdapter>{
             GetConfiguration: function () {
-                return <IGridConfiguration>{
+                var dfdResult = $.Deferred<IGridConfiguration>();
+                var cfg =  <IGridConfiguration>{
                     PageCount: 2,
                     ColumnDefinitions: <IGridColumnDefinition[]>[
                         {
@@ -42,9 +43,12 @@ class startViewModel extends PageViewModel{
                         }
                     ]
                 };
+                dfdResult.resolve(cfg);
+                return dfdResult.promise();
             },
             GetData: function (pageNumber: number) {
-                return <IGridRow[]>[
+                var dfdResult = $.Deferred<IGridRow[]>();
+                var rows = <IGridRow[]>[
                     {
                         FirstName: 'Bob',
                         LastName: 'Dole',
@@ -64,8 +68,11 @@ class startViewModel extends PageViewModel{
                         Address: '222 Fake St. 2'
                     },
                 ];
+                dfdResult.resolve(rows);
+                return dfdResult.promise();
             }
         });
+        
     }
 }
 
