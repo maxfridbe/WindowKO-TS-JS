@@ -1,4 +1,4 @@
-import ko = require('App/lib/knockout')
+import ko = require('app/lib/knockout')
 
 var registerClickDrag = function (element: Element, delataCallback: (dx: number, dy: number) => void): () => void {
     var oldMousePosX: number,

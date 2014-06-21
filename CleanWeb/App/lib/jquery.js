@@ -1,9 +1,9 @@
-define(["require", "exports", "jquery"], function(require, exports) {
+///<amd-dependency path="pager"/>
+define(["require", "exports", "pager"], function(require, exports) {
     
 
-    var $ = require('jquery');
+    var pager = require('jquery');
 
     
-    return $;
+    return pager;
 });
-//# sourceMappingURL=jquery.js.map

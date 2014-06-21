@@ -5,7 +5,7 @@ interface PagerStatic {
     onSourceError: { add: (any) => void };
 }
 interface IPagerPage { }
-interface IPageConfig {
+interface IPagerPageConfig {
     id: string;
     title: string;
     showElement? (page, callback: () => void);

@@ -1,6 +1,7 @@
-///<amd-dependency path="jquery"/>
+///<amd-dependency path="pager"/>
+
 declare var require;
 
-var $ = <JQueryStatic>require('jquery');
+var pager = <JQueryStatic>require('jquery');
 
-export = $;
+export = pager;

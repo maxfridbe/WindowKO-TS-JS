@@ -1,4 +1,4 @@
-define(["require", "exports", 'App/lib/knockout'], function(require, exports, ko) {
+define(["require", "exports", 'app/lib/knockout'], function(require, exports, ko) {
     var GridViewModel = (function () {
         function GridViewModel(adapter) {
             var _this = this;
@@ -17,4 +17,3 @@ define(["require", "exports", 'App/lib/knockout'], function(require, exports, ko
     
     return GridViewModel;
 });
-//# sourceMappingURL=GridViewModel.js.map

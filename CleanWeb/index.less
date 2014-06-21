@@ -2,52 +2,73 @@
 @import "app/lib/styles/reset.less";
 
 .tw {
-    @import "app/lib/styles/less/bootstrap.less";
-}
-.noSelect() {
-    -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            
+    @import "content/bootstrap/bootstrap.less";
 }
 
-.row, .col { overflow: hidden; position: absolute; }
-.row { left: 0; right: 0; }
-.col { top: 0; bottom: 0; }
-.scroll-x { overflow-x: auto; }
-.scroll-y { overflow-y: auto; }
+.noSelect() {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.row() {
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    position: absolute;
+}
+
+.col() {
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    position: absolute;
+}
+
+.scroll-x() {
+    overflow-x: auto;
+}
+
+.scroll-y() {
+    overflow-y: auto;
+}
 
 #app {
     .row;
     .col;
+
     .header {
         .row;
-        height:2em;
-        background-color:darkgray;
-        color:white;
+        height: 2em;
+        background-color: darkgray;
+        color: white;
+
         ul {
             list-style: none;
-            padding-left:.5em;
-            li{
-                line-height:2em;
-                padding-right:2em;
-                float:left;
-                a{
-                    text-decoration:none;
-                    cursor:pointer;
+            padding-left: .5em;
+
+            li {
+                line-height: 2em;
+                padding-right: 2em;
+                float: left;
+
+                a {
+                    text-decoration: none;
+                    cursor: pointer;
                 }
             }
         }
     }
-    .body{
-        padding:.5em;
-        top:2em;
-        bottom:0;
+
+    .body {
+        padding: .5em;
+        top: 2em;
+        bottom: 0;
         .row;
-        background-color:lightgray;
+        background-color: lightgray;
     }
 
     .window {
@@ -100,4 +121,4 @@
     }
 }
 
-@import "app/areas/home/styles/start.less";
+@import "app/areas/home/styles/homeviewstyle.less";

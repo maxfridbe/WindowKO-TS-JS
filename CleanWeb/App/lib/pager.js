@@ -7,4 +7,3 @@ define(["require", "exports", "pager"], function(require, exports) {
     
     return pager;
 });
-//# sourceMappingURL=pager.js.map

@@ -1,5 +1,5 @@
-import PageViewModel = require('App/framework/domain/PageViewModel');
-import GridViewModel = require('App/framework/domain/GridViewModel');
+import PageViewModel = require('app/framework/domain/PageViewModel');
+import GridViewModel = require('app/framework/domain/GridViewModel');
 
 class startViewModel extends PageViewModel{
     x = 3;

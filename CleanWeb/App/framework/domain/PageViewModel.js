@@ -1,4 +1,4 @@
-define(["require", "exports", 'App/lib/jquery'], function(require, exports, $) {
+define(["require", "exports", 'app/lib/jquery', 'parameters'], function(require, exports, $, parameters) {
     var PageViewModel = (function () {
         function PageViewModel() {
         }
@@ -90,8 +90,8 @@ define(["require", "exports", 'App/lib/jquery'], function(require, exports, $) {
             };
         };
         PageViewModel.prototype._page = function (pageRouteId, title, area, conventionName) {
-            var viewName = area + "/views/" + conventionName + "View.htm";
-            var viewModelName = area + "/viewmodels/" + conventionName + "ViewModel";
+            var viewName = area + "/views/" + conventionName + "view.htm?v=" + parameters.version;
+            var viewModelName = area + "/viewmodels/" + conventionName + "viewmodel";
 
             var dfdShouldLoadVM = $.Deferred();
             var vmPromise = this._loadVM(viewModelName, dfdShouldLoadVM.promise());
@@ -118,4 +118,3 @@ define(["require", "exports", 'App/lib/jquery'], function(require, exports, $) {
     
     return PageViewModel;
 });
-//# sourceMappingURL=PageViewModel.js.map

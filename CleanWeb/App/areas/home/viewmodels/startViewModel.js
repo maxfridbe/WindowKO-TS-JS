@@ -4,7 +4,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", 'App/framework/domain/PageViewModel', 'App/framework/domain/GridViewModel'], function(require, exports, PageViewModel, GridViewModel) {
+define(["require", "exports", 'app/framework/domain/PageViewModel', 'app/framework/domain/GridViewModel'], function(require, exports, PageViewModel, GridViewModel) {
     var startViewModel = (function (_super) {
         __extends(startViewModel, _super);
         function startViewModel() {
@@ -91,4 +91,3 @@ define(["require", "exports", 'App/framework/domain/PageViewModel', 'App/framewo
     
     return startViewModel;
 });
-//# sourceMappingURL=startViewModel.js.map

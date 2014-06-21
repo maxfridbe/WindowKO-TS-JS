@@ -2,49 +2,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link rel="stylesheet/less" type="text/css" href="index.less" />
-    <script type="text/javascript" src="app/lib/less-1.5.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.min.css"/>
+    <!--<link rel="stylesheet/less" type="text/css" href="index.less" />
+    <script type="text/javascript" src="app/lib/less-1.5.1.min.js"></script>-->
 
-    <script type="text/html" id="tmpl1">
-        template
-        <span data-bind="text:name"></span>
-    </script>
+    
 </head>
 <body>
-    <div id="app">
+    <div id="app" data-bind="page:{id:'start'}">
         <div class="header">
             <ul>
-                <li><a data-bind="click:showalldialogs">Show all Dialogs</a></li>
-                <li><a data-bind="click:hidealldialogs">Hide all Dialogs</a></li>
+                <li><a href="#start/start">Home</a></li>
                 <!-- ko foreach:Navigation-->
                 <li><a data-bind="attr:{'href':Href},text:Title"></a></li>
                 <!--/ko-->
             </ul>
         </div>
-        <div data-bind="template:{name:'tmplWindowed',data:Win3}">
-
-        </div>
 
         <div class="body" data-bind="foreach:Pages">
-            <div data-bind="page: $data">
+            <div data-bind="page: $data.config, attr:{class:$data.cssClass}">
             </div>
         </div>
 
 
     </div>
-    <script type="text/javascript" src="app/lib/require.js"></script>
+    <script type="text/javascript" src="node_modules/requirejs/require.js" data-main="init"></script>
 
-    <script>
-        requirejs.config({
-            paths: {
-                'jquery': "App/lib/jquery-1.10.2.min",
-                'knockout': "App/lib/knockout-3.0.0",
-                'pager': "App/lib/pager.min"
-            }
-        });
-        require(['index']);
-
-    </script>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
-declare var require;
-import $ = require('App/lib/jquery')
+import $ = require('app/lib/jquery');
+import parameters = require('parameters');
 
 class PageViewModel {
     constructor() { }
@@ -85,9 +85,9 @@ class PageViewModel {
             });
         };
     }
-    _page(pageRouteId: string, title: string, area: string, conventionName: string): IPageConfig {
-        var viewName: string = area + "/views/" + conventionName + "View.htm";
-        var viewModelName: string = area + "/viewmodels/" + conventionName + "ViewModel";
+    _page(pageRouteId: string, title: string, area: string, conventionName: string): IPagerPageConfig {
+        var viewName: string = area + "/views/" + conventionName + "view.htm?v=" + parameters.version;
+        var viewModelName: string = area + "/viewmodels/" + conventionName + "viewmodel";//version auto appended
 
         var dfdShouldLoadVM = $.Deferred();
         var vmPromise = this._loadVM(viewModelName, dfdShouldLoadVM.promise());
@@ -95,7 +95,7 @@ class PageViewModel {
         var dfdVMLoaded = $.Deferred<PageViewModel>();
 
 
-        return <IPageConfig>{
+        return <IPagerPageConfig>{
             id: pageRouteId,
             title: title,
             showElement: this._buildShow(vmPromise),

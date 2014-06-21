@@ -1,5 +1,4 @@
-/// <reference path="../../viewmodels/interfaces.d.ts" />
-import ko = require('App/lib/knockout');
+import ko = require('app/lib/knockout');
 
 class GridViewModel implements IGridViewModel {
 

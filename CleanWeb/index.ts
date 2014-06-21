@@ -1,39 +1,94 @@
+import ko = require('app/lib/knockout');
+import $ = require('app/lib/jquery');
+import system = require('app/framework/system');
+import PageViewModel = require('app/framework/domain/PageViewModel');
+import p1 = require('app/lib/extensions/knockout/windowing');
+import pager = require('app/lib/pager');
+import parameters = require('parameters');
 
+p1;//ensure plugin loads
+pager.onSourceError.add(function (event) {
+    var page = event.page;
+    var elm: HTMLDivElement = page.element;
+    elm.innerHTML = "<div class='alert'>Error loading page" + event.url + "</div>";
+});
 
-import ko = require('App/lib/knockout')
-import MainViewModel = require('App/ViewModels/MainViewModel')
-import $ = require('App/lib/jquery')
-import pager = require('App/lib/pager')
+//load templates
+var tmplPromise = system.LoadTemplatesAsync([
+    { templateId: "tmplWindowed", templatePath: "/app/framework/templates/windowtemplates.htm" },
+    { templateId: "tmplGrid", templatePath: "/app/framework/templates/gridtemplates.htm" },
+]);
 
-//import plugins
-import p1 = require('App/lib/extensions/knockout/windowing')
+interface IPagerDiv {
+    config: IPagerPageConfig;
+    cssClass: string;
+}
 
+//setup pager + knockout
+class IndexViewModel extends PageViewModel {
 
-import system = require('App/framework/system');
-
-export module Index {
-    pager.onSourceError.add(function (event) {
-        var page = event.page;
-        $(page.element).empty().append($('<div></div>', { text: 'Error loading page ' + event.url, "class": 'alert' }));
-    });
-
-    //application
-    var main = new MainViewModel()
-    pager.extendWithPage(main);
-    if (window.location.href.indexOf("#start") !== -1) {
-        pager.start();
-    } else {
-        pager.start('start');
+    pageFromManifest(areaManifest: IAreaManifest): IPagerDiv {
+        var p = this._page(areaManifest.UrlToken,
+            areaManifest.Title,
+            'app/areas/' + areaManifest.Key,
+            areaManifest.InitialModule);
+        return {
+            config: p,
+            cssClass: areaManifest.Key
+        };
     }
 
-    //load templates
-    var tmplPromise = system.LoadTemplates([
-        { templateId: "tmplWindowed", templatePath: "/app/framework/templates/windowtemplates.htm" },
-        { templateId: "tmplGrid", templatePath: "/app/framework/templates/gridtemplates.htm" },
-    ]);
+    constructor() {
+        super();
 
-    //apply bindings
-    tmplPromise.done(() => {
-        ko.applyBindings(main, document.getElementById("app"))
-    });
+
+        parameters.areas.forEach((area) => {
+            var areaName = 'app/areas/' + area;
+            system.RequireAsync<IAreaManifest>(areaName + '/manifest')
+                .done((areaManifest: IAreaManifest) => {
+                    if (areaManifest.LoadStyle) {
+                        system.LoadStyleAsync(areaName + '/styles/' + areaManifest.LoadStyle).done(() => {
+                            var p = this.pageFromManifest(areaManifest);
+                            this.Pages.push(p);
+                        });
+                    }
+                    else {
+                        var p = this.pageFromManifest(areaManifest);
+                        this.Pages.push(p);
+                    }
+
+                    if (area == 'home')
+                        return;
+                    this.Navigation.push({ Href: "#start/" + areaManifest.UrlToken, Title: areaManifest.Title });
+                });
+
+        });
+
+    }
+
+    public Navigation = ko.observableArray<IPageNavigation>();
+    public Pages = ko.observableArray<IPagerDiv>();
 }
+
+
+
+//application
+var indexVm = new IndexViewModel();
+pager.extendWithPage(indexVm);
+if (window.location.href.indexOf("#start") !== -1) {
+    pager.start();
+} else {
+    pager.start('start/start');
+}
+
+
+
+//apply bindings
+tmplPromise.done(() => {
+    ko.applyBindings(indexVm);
+});
+
+
+
+
+

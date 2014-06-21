@@ -1,4 +1,4 @@
-define(["require", "exports", 'App/lib/knockout'], function(require, exports, ko) {
+define(["require", "exports", 'app/lib/knockout'], function(require, exports, ko) {
     var registerClickDrag = function (element, delataCallback) {
         var oldMousePosX, oldMousePosY;
         var onMouseMove = function (mouse) {
@@ -66,4 +66,3 @@ define(["require", "exports", 'App/lib/knockout'], function(require, exports, ko
     
     return ko;
 });
-//# sourceMappingURL=windowing.js.map

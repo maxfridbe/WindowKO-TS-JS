@@ -6,4 +6,3 @@ define(["require", "exports", "knockout"], function(require, exports) {
     
     return ko;
 });
-//# sourceMappingURL=knockout.js.map
